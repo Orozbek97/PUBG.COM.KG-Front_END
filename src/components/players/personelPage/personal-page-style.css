@@ -1,0 +1,77 @@
+
+
+.personal-info-edit-form {
+		margin: 0 auto;
+		width: 400px;
+}
+.edit-image {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 20px;
+}
+.edit-image img {
+		border-radius: 50%;
+		object-fit: cover;
+	  margin-bottom: 10px;
+}
+
+.edit-image-btn {
+		background-color: #009536;;
+		border-radius: 5px;
+		color: #eee;
+		text-align: center;
+		width: 100%;
+		margin-top: 10px;
+		border: none;
+		padding: 4px 0;
+}
+
+/*!*avatar edit page*!/////////////////////////////*/
+.preview {
+	  display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: 0 auto 20px;
+}
+.preview-position {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+.avatar-box {
+	border: 1px solid #ffffff;
+	border-radius: 15px;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+}
+.avatar-box.selected {
+	background: rgba(51, 115, 211, 0.3);
+	z-index: 22;
+	border: none;
+	transition: 1ms;
+}
+.avatar-box:hover {
+	background: rgba(108, 159, 229, 0.3);
+	z-index: 22;
+	border: none;
+	transition: 0.5ms;
+}
+.avatar-box img {
+	border-radius: 50%;
+	object-fit: cover;
+	z-index: 1;
+}
+.avatar-box p {
+	margin-top: 10px;
+	color: white;
+	font-weight: bold;
+}
+
+
+/*///////////////////////////////////////////////////*/

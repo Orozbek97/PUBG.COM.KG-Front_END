@@ -1,0 +1,200 @@
+
+.tournament-page-title {
+	display: flex;
+	align-items: center;
+	font-family: "Play Regular", sans-serif;
+	background: #4d5154 ;
+	padding: 5px 10px ;
+	border-radius: 15px 15px 0 0;
+	margin-bottom: 10px;
+}
+.tournament-page-title h1 {
+	color: white;
+	text-align: center;
+	flex: auto;
+	background: none;
+}
+.tournament-page-title h2 {
+	color: white;
+	text-align: end;
+	background: none;
+}
+.place-and-name {
+	display: flex;
+	gap: 5px;
+	background: none;
+}
+.kill-and-prizeMoney {
+	display: flex;
+	gap: 5px;
+	background: none;
+}
+.kill-and-prizeMoney-data {
+	display: flex;
+	gap: 40px;
+	background: none;
+}
+.participation-card {
+	display: flex;
+}
+.participation-tag {
+	display: flex;
+	justify-content: space-between;
+	background-color: #239b44;
+	padding: 10px;
+	border-radius: 10px;
+}
+.participation-tag p {
+	color: white;
+}
+.participation-data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #447e69;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 5px 0 ;
+}
+.tournament-data {
+	background-color: #6c6969;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 5px 0 ;
+}
+.tournament-statistic {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: none;
+}
+.tournament-date {
+	background: none;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.participation-data p{
+	color: white;
+}
+.tournament-data p {
+	color: white;
+	font-family: "Play Regular" , sans-serif;
+}
+.tournament-date p {
+	color: #ccc5c5;
+}
+.tournament-name-name {
+	margin-left: 5px;
+	
+}
+.player-avatar-and-name {
+	background: none;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+.participation-page-title {
+	display: flex;
+	gap: 10px ;
+	align-items: baseline;
+	justify-content: center;
+	padding: 5px;
+	border-radius: 5px;
+	background: silver;
+}
+.participation-page-title h3{
+	color: #1c1b1b;
+	background: none;
+	font-family: "Play Regular" , sans-serif;
+	font-weight: bold;
+
+}
+.participation-page-title h2{
+	color: #131111;
+	background: none;
+}
+.payment-steps-title {
+	margin: 5px 0;
+	padding: 0 10px;
+	background-color: silver;
+	border-radius: 10px;
+}
+.payment-steps-title h3 {
+	color: #111111;
+	text-align: start;
+	background: none;
+}
+.payment-steps ul li {
+	font-family: "Play Regular", sans-serif;
+	font-style: normal;
+}
+.tournament-rules ol {
+	color: aquamarine;
+	font-weight: bold;
+	font-family: "Play Regular", sans-serif;
+	font-size: 30px;
+}
+.tournament-rules ul li {
+	font-family: "Play Regular", sans-serif;
+	font-style: normal;
+	font-weight: normal;
+}
+.payment-steps p {
+	color: white;
+	font-family: "Play Regular", sans-serif;
+	font-size: 20px;
+}
+.mbank-visa-pay {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	background-color: #49494d;
+	border-radius: 10px;
+	padding: 5px;
+}
+.icon-pay-choice {
+	background: none;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.copy-text {
+	background: none;
+	display: flex;
+	gap: 5px;
+	align-items: baseline;
+	float: right;
+}
+.tournament-fee {
+	background-color: #49494d;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.form-upload-input {
+	font-size: 18px;
+	font-weight: 300;
+	font-family: SofiaSans, sans-serif;
+	margin-left: 15px;
+}
+
+.form-upload-input::file-selector-button {
+	margin-right: 30px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 6px;
+	font-weight: 600;
+	font-family: inherit;
+	cursor: pointer;
+	background-color: silver;
+}
+.rules-checkbox {
+	display: inline-table;
+	align-items: center;
+  margin: 10px 10px 10px 0;
+}
+

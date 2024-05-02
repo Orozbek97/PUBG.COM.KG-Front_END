@@ -1,0 +1,40 @@
+* {
+  background-color: #212529;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+@font-face {
+  font-family: 'Play Bold';
+  src:  url("./fonts/Play-Bold.ttf") format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Play Regular';
+  src: url("./fonts/Play-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Shantell';
+  src: url('./fonts/ShantellSans-Variable.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Oswald';
+  src: url('./fonts/Oswald-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Jura';
+  src: url('./fonts/Jura-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'SofiaSans';
+  src: url('./fonts/SofiaSansCondensed-VariableFont_wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bellotta';
+  src: url('./fonts/Bellota-Regular.ttf') format('truetype');
+}
+
+
+
