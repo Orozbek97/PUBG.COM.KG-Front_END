@@ -57,8 +57,19 @@ const AdminPageAllPlayer = () => {
 			}
 	}
 	
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleOpen = (userId) => {
+		setOpen(prevState => ({
+			...prevState,
+			[userId]: true
+		}));
+	};
+	
+	const handleClose = (userId) => {
+		setOpen(prevState => ({
+			...prevState,
+			[userId]: false
+		}));
+	};
 	
 	const handleSearchInputChange = (event) => {
 		setSearchQuery(event.target.value);
@@ -193,12 +204,12 @@ const AdminPageAllPlayer = () => {
 											</Link>
 										</Button>
 										
-										<Button variant={'danger'} onClick={handleOpen}> Удалить </Button>
+										<Button variant={'danger'} onClick={() => handleOpen(player._id)}> Удалить </Button>
 									</div>
 									<Modal
 											keepMounted
-											open={open}
-											onClose={handleClose}
+											open={open[player._id]}
+											onClose={() => handleClose(player._id)}
 											aria-labelledby="keep-mounted-modal-title"
 											aria-describedby="keep-mounted-modal-description"
 									>
@@ -207,7 +218,7 @@ const AdminPageAllPlayer = () => {
 												Удалить {player.name} ?
 											</Typography>
 												<div className="admin-tournament-button d-flex flex-row">
-													<Button variant={'secondary'} onClick={handleClose}> Нет </Button>
+													<Button variant={'secondary'} onClick={() => handleClose(player._id)}> Нет </Button>
 													<Button variant={'danger'} onClick={() => handleDeletePlayer(player._id)}> Да </Button>
 													
 												</div>
