@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Container} from "react-bootstrap";
+import {Alert, Container} from "react-bootstrap";
 import './admin-auth-style.css'
 import {useNavigate} from "react-router-dom";
 import {ClipLoader} from "react-spinners";
@@ -40,6 +40,7 @@ const AdminAuth = () => {
 			<>
 				<Container>
 					<div className="login-box">
+						{error ? <Alert variant={'danger'}>{error} </Alert> : ''}
 						<div className="login-container">
 							<h3 className={'text-white'}>Админ панель</h3>
 							<div className="login-form">

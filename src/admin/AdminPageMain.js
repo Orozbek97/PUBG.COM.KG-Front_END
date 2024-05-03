@@ -10,7 +10,6 @@ const AdminPageMain = () => {
     const { admin } = useContext(Context)
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     
     
     
