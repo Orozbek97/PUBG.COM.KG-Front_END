@@ -2,8 +2,7 @@ import axios from 'axios';
 import {AuthResponse} from "../models/response/AuthResponse";
 
 
-export const API_URL = 'http://185.185.68.189:5000/add';
-
+export const API_URL = 'https://pubg.com.kg/add';
 
 const $api = axios.create({
     withCredentials: true,
