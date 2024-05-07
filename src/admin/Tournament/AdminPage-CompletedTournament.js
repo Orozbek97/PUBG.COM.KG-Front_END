@@ -70,8 +70,20 @@ const AdminPageCompletedTournament = () => {
 		}
 	};
 	
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleOpen = (tournamentId) => {
+		setOpen(prevState => ({
+			...prevState,
+			[tournamentId]: true
+		}));
+	};
+	
+	const handleClose = (tournamentId) => {
+		setOpen(prevState => ({
+			...prevState,
+			[tournamentId]: false
+		}));
+		}
+
 	
 	if (loading) {
 		return (
@@ -118,15 +130,15 @@ const AdminPageCompletedTournament = () => {
 											</Button>
 											<Button
 													variant={tournament.endState ? 'success' : 'danger'}
-													onClick={handleOpen}
+													onClick={() => handleOpen(tournament._id)}
 													disabled={tournament.buttonLoading}
 											>
 												{tournament.endState ? 'Возобновить' : 'Завершить'}
 											</Button>
 											<Modal
 													keepMounted
-													open={open}
-													onClose={handleClose}
+													open={open[tournament._id]}
+													onClose={() => handleClose(tournament._id)}
 													aria-labelledby="keep-mounted-modal-title"
 													aria-describedby="keep-mounted-modal-description"
 											>
@@ -135,7 +147,7 @@ const AdminPageCompletedTournament = () => {
 														{tournament.endState ? `Возобновить ${tournament.name} ?` : ` Завершить ${tournament.name} ?` }
 													</Typography>
 													<div className="admin-tournament-button d-flex flex-row">
-														<Button variant={'secondary'} onClick={handleClose}> Нет </Button>
+														<Button variant={'secondary'} onClick={() => handleClose(tournament._id)}> Нет </Button>
 														<Button
 																variant={tournament.endState ? 'success' : 'danger'}
 																onClick={() => handleCompleteTournament(tournament._id)}

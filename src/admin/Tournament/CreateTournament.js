@@ -1,8 +1,9 @@
 import {observer} from "mobx-react-lite";
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Button, Container} from "react-bootstrap";
 import Datetime from "react-datetime";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {ClipLoader} from "react-spinners";
 import {Context} from "../../index";
 import "../adminStyle.css"
 
@@ -19,6 +20,32 @@ const CreateTournament = () => {
     const [tourState, setTourState] = useState(true);
     const [endState, setEndState] = useState(false);
     const [fee, setFee] = useState(0);
+    const { admin } = useContext(Context)
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+    
+    
+    
+    useEffect(() => {
+        admin.checkAuth().then(() => {
+            setIsLoading(false);
+        });
+    }, [admin.isAuth]);
+    
+    if (isLoading) {
+        return (
+            <div className="d-flex flex-column justify-content-center align-items-center gap-3" style={{height: '100vh'}}>
+                <h4 className={'text-white'}> загрузка </h4>
+                <ClipLoader color={'#4679ef'} />
+            </div>
+        )
+    }
+    
+    if (!admin.isAuth) {
+        return (
+            navigate('/admin-panel/pubg/www/auth')
+        );
+    }
 
 
     const handleNameChange = (e) => {

@@ -2,7 +2,7 @@ import {Box, Modal, Typography} from "@mui/material";
 import React, {useContext, useEffect, useState} from "react";
 import {Button, Container} from "react-bootstrap";
 import './admin-player-page-style.css'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {ClipLoader} from "react-spinners";
 import {Context} from "../../index";
 import AdminService from "../../services/AdminService";
@@ -28,6 +28,28 @@ const AdminPageAllPlayer = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [sortBy, setSortBy] = useState("");
 	const [open, setOpen] = React.useState(false);
+	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(true);
+	
+	
+	
+	useEffect(() => {
+		if (isLoading) {
+			return;
+		}
+		
+		admin.checkAuth().then(() => {
+			setIsLoading(false);
+		});
+	}, [admin.isAuth, isLoading]);
+	
+	
+	
+	useEffect(() => {
+		if (!admin.isAuth) {
+			navigate('/admin-panel/pubg/www/auth');
+		}
+	}, [admin.isAuth, navigate]);
 	
 	
 

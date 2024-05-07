@@ -1,9 +1,10 @@
 import {Box, Modal} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, Container} from "react-bootstrap";
 import './admin-tournament-page-style.css'
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ClipLoader} from "react-spinners";
+import {Context} from "../../index";
 import AdminService from "../../services/AdminService";
 import GetTournaments from "../../services/GetTournaments";
 
@@ -27,6 +28,30 @@ const AdminPageTournament = () => {
 	const [tournamentNotFound, setTournamentNotFound] = useState(false);
 	const [openImages, setOpenImages] = useState({});
 	const [participantResults, setParticipantResults] = useState({});
+	const { admin } = useContext(Context)
+	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(true);
+	
+	
+	
+	useEffect(() => {
+		if (isLoading) {
+			return;
+		}
+		
+		admin.checkAuth().then(() => {
+			setIsLoading(false);
+		});
+	}, [admin.isAuth, isLoading]);
+	
+	
+	
+	useEffect(() => {
+		if (!admin.isAuth) {
+			navigate('/admin-panel/pubg/www/auth');
+		}
+	}, [admin.isAuth, navigate]);
+	
 	
 	
 	const handleChangeResultKill = (participantId, value) => {
@@ -195,14 +220,6 @@ const AdminPageTournament = () => {
 	///////////////////////////////
 	
 	
-	if (loading) {
-		return (
-				<div className="d-flex flex-column justify-content-center align-items-center gap-2 text-white" style={{ height: '100vh' }}>
-					<ClipLoader color={'#299cff'} />
-					<h3> Заружается данные </h3>
-				</div>
-		);
-	}
 	
 	if (tournamentNotFound) {
 		
@@ -221,141 +238,149 @@ const AdminPageTournament = () => {
 	
 	return (
 			<Container>
-				<div className="admin-page-title">
-					<h2>Информация о Турнире </h2>
-				</div>
-				<h2 className={'text-white bg-primary'}>{tournament.name}</h2>
-				<div className="admin-tournament-data-box">
-					<div className="admin-tournament-data">
-						<p> Дата:</p> <p>{formatDate(tournament.startDate)}</p> / <p>{formatTime(tournament.startDate)}</p>
-					</div>
-					<div className="admin-tournament-data deadline-data">
-						<p> Дедлайн:</p> <p> {registrationDeadline} </p>
-					</div>
-					<div className="admin-tournament-data">
-						<p> Карта:</p> <p> {tournament.map} </p>
-					</div>
-					<div className="admin-tournament-data">
-						<p> Формат:</p> <p> {tournament.tournamentType} </p>
-					</div>
-					<div className="admin-tournament-data">
-						<p> Взнос:</p> <p> {tournament.fee} сом</p>
-					</div>
-					<div className="admin-tournament-data">
-						<p> Макс.число:</p> <p> {tournament.maxPlayers} </p>
-					</div>
-					<div className="admin-tournament-data">
-						<p> Мин.Число:</p> <p> {tournament.minPlayers} </p>
-					</div>
-					<div className="admin-tournament-data money-data">
-						<p> Призовой фонд:</p> <p> {prizeMoney} сом</p>
-					</div>
-					<div className="admin-tournament-data money-data">
-						<p> За 1-е место:</p> <p> {firstPlaceMoney} сом</p>
-					</div>
-					<div className="admin-tournament-data money-data ">
-						<p> За 2-е место:</p> <p> {secondPlaceMoney} сом</p>
-					</div>
-					<div className="admin-tournament-data money-data">
-						<p> За 3-е место:</p> <p> {thirdPlaceMoney} сом</p>
-					</div>
-					<div className="admin-tournament-data tournament-status">
-						<p> Статус:</p>
-						{!tournament.endState && tournament.tourState ?
-								(<p> Идет регистирация </p>)
-								:
-								(<p className={'text-white bg-danger'}> Регистирация завершена </p>)}
-					</div>
-				</div>
-				<div className="admin-page-title">
-					<h2>Участники </h2>
-					<p className={'admin-participant-data-index'}> {tournament.participants.length} </p>
-				</div>
-				{tournament.participants.map(( participant, index ) => (
-						<div key={participant.userId} className="admin-tournament-data-box admin-participant-data">
-							<div className="admin-tournament-data_and_delete-button">
-								<div className="admin-tournament-data participant-list">
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5> Информация | </h5>
-									</div>
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5> Имя: </h5> <p> {participant.name} </p>
-									</div>
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5> Ник: </h5> <p> {participant.pubgNick} </p>
-									</div>
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5> ID: </h5>  <p>  {participant.pubgId} </p>
-									</div>
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5> Телефон: </h5>  <p> {participant.phone}</p>
-									</div>
-									<div className="admin-tournament-data participant-list tournament-player-data-list">
-										<h5>Чек: </h5>
-										<>
-											<div onClick={() => handleOpenImage(participant.userId)} className="paymentImage">
-												<img src={participant.checkImage} alt={'paymentImage'}/>
+				{ tournament ? (
+						<>
+							<div className="admin-page-title">
+								<h2>Информация о Турнире </h2>
+							</div>
+							<h2 className={'text-white bg-primary'}>{tournament.name}</h2>
+							<div className="admin-tournament-data-box">
+								<div className="admin-tournament-data">
+									<p> Дата:</p> <p>{formatDate(tournament.startDate)}</p> / <p>{formatTime(tournament.startDate)}</p>
+								</div>
+								<div className="admin-tournament-data deadline-data">
+									<p> Дедлайн:</p> <p> {registrationDeadline} </p>
+								</div>
+								<div className="admin-tournament-data">
+									<p> Карта:</p> <p> {tournament.map} </p>
+								</div>
+								<div className="admin-tournament-data">
+									<p> Формат:</p> <p> {tournament.tournamentType} </p>
+								</div>
+								<div className="admin-tournament-data">
+									<p> Взнос:</p> <p> {tournament.fee} сом</p>
+								</div>
+								<div className="admin-tournament-data">
+									<p> Макс.число:</p> <p> {tournament.maxPlayers} </p>
+								</div>
+								<div className="admin-tournament-data">
+									<p> Мин.Число:</p> <p> {tournament.minPlayers} </p>
+								</div>
+								<div className="admin-tournament-data money-data">
+									<p> Призовой фонд:</p> <p> {prizeMoney} сом</p>
+								</div>
+								<div className="admin-tournament-data money-data">
+									<p> За 1-е место:</p> <p> {firstPlaceMoney} сом</p>
+								</div>
+								<div className="admin-tournament-data money-data ">
+									<p> За 2-е место:</p> <p> {secondPlaceMoney} сом</p>
+								</div>
+								<div className="admin-tournament-data money-data">
+									<p> За 3-е место:</p> <p> {thirdPlaceMoney} сом</p>
+								</div>
+								<div className="admin-tournament-data tournament-status">
+									<p> Статус:</p>
+									{!tournament.endState && tournament.tourState ?
+											(<p> Идет регистирация </p>)
+											:
+											(<p className={'text-white bg-danger'}> Регистирация завершена </p>)}
+								</div>
+							</div>
+							<div className="admin-page-title">
+								<h2>Участники </h2>
+								<p className={'admin-participant-data-index'}> {tournament.participants.length} </p>
+							</div>
+							{tournament.participants.map((participant, index) => (
+									<div key={participant.userId} className="admin-tournament-data-box admin-participant-data">
+										<div className="admin-tournament-data_and_delete-button">
+											<div className="admin-tournament-data participant-list">
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5> Информация | </h5>
+												</div>
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5> Имя: </h5> <p> {participant.name} </p>
+												</div>
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5> Ник: </h5> <p> {participant.pubgNick} </p>
+												</div>
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5> ID: </h5>  <p>  {participant.pubgId} </p>
+												</div>
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5> Телефон: </h5>  <p> {participant.phone}</p>
+												</div>
+												<div className="admin-tournament-data participant-list tournament-player-data-list">
+													<h5>Чек: </h5>
+													<>
+														<div onClick={() => handleOpenImage(participant.userId)} className="paymentImage">
+															<img src={participant.checkImage} alt={'paymentImage'}/>
+														</div>
+														<Modal
+																open={openImages[participant.userId] || false}
+																onClose={() => handleCloseImage(participant.userId)}
+														
+														>
+															<Box sx={style}>
+																<img src={participant.checkImage} alt={'paymentImage'}
+																     style={{width: '100%', height: '100%'}}/>
+															</Box>
+														</Modal>
+													</>
+												</div>
 											</div>
-											<Modal
-													open={openImages[participant.userId] || false}
-													onClose={() => handleCloseImage(participant.userId)}
+											<div className="participant-delete-button d-flex flex-wrap gap-1">
+												<Button variant={'danger'}
+												        onClick={() => handleRemoveParticipant(participant.userId)}>
+													{buttonLoading === participant.userId ? <ClipLoader color='#fff' size={20}/> : 'Удалить'}
+												</Button>
+												
+												<Link to={`/admin-panel/pubg/www/player/id/${participant.userId}`} style={{background: 'none'}}>
+													<Button>
+														К игроку </Button>
+												</Link>
 											
-											>
-												<Box sx={style}>
-													<img src={participant.checkImage} alt={'paymentImage'}
-													     style={{width: '100%', height: '100%'}}/>
-												</Box>
-											</Modal>
-										</>
+											
+											</div>
+										</div>
+										<div className="admin-tournament-data participant-list ">
+											<p className={'admin-participant-data-index'}> {index + 1} </p>
+											<div className="admin-tournament-data participant-list tournament-player-data-list">
+												<h5> Статистика | </h5>
+											</div>
+											<div className="admin-tournament-data participant-list tournament-player-data-list">
+												<h5> Место: </h5> <p> {participant.place} </p>
+												<input
+														type={"text"}
+														value={participantResults[participant._id]?.place || ''}
+														onChange={(e) => handleChangeResultPlace(participant._id, e.target.value)}
+												/>
+											</div>
+											<div className="admin-tournament-data participant-list tournament-player-data-list">
+												<h5> Килл: </h5> <p> {participant.kill} </p>
+												<input
+														type={"text"}
+														value={participantResults[participant._id]?.kill || ''}
+														onChange={(e) => handleChangeResultKill(participant._id, e.target.value)}
+												/>
+											</div>
+											<div className="admin-tournament-data participant-list tournament-player-data-list">
+												<h5> Сумма выигрыша: </h5>  <p>  {participant.prizeMoney} </p>
+												<input type={"text"}
+												       value={participantResults[participant._id]?.prizeMoney || ''}
+												       onChange={(e) => handleChangeResultMoney(participant._id, e.target.value)}/>
+											</div>
+										</div>
+									
 									</div>
-								</div>
-								<div className="participant-delete-button d-flex flex-wrap gap-1">
-									<Button variant={'danger'}
-									        onClick={() => handleRemoveParticipant(participant.userId)}>
-										{buttonLoading === participant.userId ? 	<ClipLoader color='#fff' size={20}/> : 'Удалить' }
-									</Button>
-									
-										<Link to={`/admin-panel/pubg/www/player/id/${participant.userId}`} style={{background: 'none'}}>
-											<Button>
-											К игроку </Button>
-										</Link>
-										
-									
-								</div>
-							</div>
-							<div className="admin-tournament-data participant-list ">
-								<p className={'admin-participant-data-index'}> {index + 1} </p>
-								<div className="admin-tournament-data participant-list tournament-player-data-list">
-									<h5> Статистика | </h5>
-								</div>
-								<div className="admin-tournament-data participant-list tournament-player-data-list">
-									<h5> Место: </h5> <p> {participant.place} </p>
-									<input
-											type={"text"}
-											value={participantResults[participant._id]?.place || ''}
-											onChange={(e) => handleChangeResultPlace(participant._id, e.target.value)}
-									/>
-								</div>
-								<div className="admin-tournament-data participant-list tournament-player-data-list">
-									<h5> Килл: </h5> <p> {participant.kill} </p>
-									<input
-											type={"text"}
-											value={participantResults[participant._id]?.kill || ''}
-											onChange={(e) => handleChangeResultKill(participant._id, e.target.value)}
-									/>
-								</div>
-								<div className="admin-tournament-data participant-list tournament-player-data-list">
-									<h5> Сумма выигрыша: </h5>  <p>  {participant.prizeMoney} </p>
-									<input type={"text"}
-									       value={participantResults[participant._id]?.prizeMoney || ''}
-									       onChange={(e) => handleChangeResultMoney(participant._id, e.target.value)}/>
-								</div>
-							</div>
-						
+							))}
+							<Button variant={'primary'} size={'lg'} onClick={updateResults}> {buttonLoading ?
+									<ClipLoader color='#fff' size={20}/> : 'Сохранить результаты'} </Button>
+						</>
+				) : (
+						<div className={"text-white"}>
+							Загрузка данных
 						</div>
-				))}
-				<Button variant={'primary'} size={'lg'} onClick={updateResults}> {buttonLoading ?
-						<ClipLoader color='#fff' size={20}/> : 'Сохранить результаты' } </Button>
+				)}
 			
 			</Container>
 	)

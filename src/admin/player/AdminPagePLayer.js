@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button, Container} from "react-bootstrap";
 
 import './admin-player-page-style.css'
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ClipLoader} from "react-spinners";
 import {Context} from "../../index";
 import AdminService from "../../services/AdminService";
@@ -16,6 +16,28 @@ const AdminPagePLayer = () => {
 	const [newFirstPlace, setNewFirstPlace] = useState(0);
 	const [newSecondPlace, setNewSecondPlace] = useState(0);
 	const [newThirdPlace, setNewThirdPlace] = useState(0)
+	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(true);
+	
+	
+	
+	useEffect(() => {
+		if (isLoading) {
+			return;
+		}
+		
+		admin.checkAuth().then(() => {
+			setIsLoading(false);
+		});
+	}, [admin.isAuth, isLoading]);
+	
+	
+	
+	useEffect(() => {
+		if (!admin.isAuth) {
+			navigate('/admin-panel/pubg/www/auth');
+		}
+	}, [admin.isAuth, navigate]);
 	
 	
 	const handleFirstPlaceChange = (e) => {
