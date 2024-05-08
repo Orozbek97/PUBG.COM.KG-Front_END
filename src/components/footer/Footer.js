@@ -28,6 +28,9 @@ const FooterPage = () => {
                     <div className="col">
                         <div className="footer-links">
                             <div className="soc-links">
+                                <a href='http://www.net.kg/stat.php?id=7256&amp;fromsite=7256' target='_blank'><img
+                                    src="http://www.net.kg/img.php?id=7256" border='0' alt='WWW.NET.KG' width='23'
+                                    height='23'/></a>
                                 <a href="https://www.instagram.com/pubg_com_kg"> <InstagramIcon fontSize={'large'}/></a>
                                 <a href="https://t.me/pubg_com_kg"> <TelegramIcon sx={{fontSize: 40}}/></a>
                             </div>
