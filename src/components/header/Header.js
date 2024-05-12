@@ -37,7 +37,13 @@ function CollapsibleExample() {
                  |
                  <Nav.Link href="/player/all">Игроки</Nav.Link>
                  |
-                 <Nav.Link onClick={() => store.logout()}>Выйти </Nav.Link>
+                 <Nav.Link href="/instruction">Вопросы-Ответы</Nav.Link>
+                 |
+                 <Nav.Link href="/about-us">О Нас</Nav.Link>
+                 |
+                 <Nav.Link href="https://t.me/dark_warriorr"  target="_blank">Написать Нам</Nav.Link>
+                 |
+                 <Nav.Link onClick={() => store.logout()} className={'text-bg-warning'}>Выйти </Nav.Link>
                </div>
              </Container>
            </div>

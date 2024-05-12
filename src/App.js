@@ -12,6 +12,8 @@ import ForgotPasswordPage from "./components/autorization/forgoutPassword/Forgot
 import ResetPasswordPage from "./components/autorization/forgoutPassword/ResetPasswordPage";
 import SuccessSendEmail from "./components/autorization/forgoutPassword/succesSendEmail";
 import SuccessRegistrationPage from "./components/autorization/SuccesRegistrationPage";
+import AboutUs from "./components/other/about-us";
+import Instruction from "./components/other/Instruction";
 import AllPlayers from "./components/players/AllPlayers";
 import AvatarEdit from "./components/players/personelPage/AvatarEditPage";
 import PersonalArea from "./components/players/personelPage/PersonalArea";
@@ -52,6 +54,9 @@ const App = () => {
                 <Route path="/team" element={ <TabsTeam />}></Route>
                 <Route path="/team/squadTeam/:squadteamId" element={ <SquadTeamsPage />}> </Route>
                 <Route path="/team/duoTeam/:duoteamId" element={ <DuoTeamsPage />}> </Route>
+                
+                <Route path="/instruction" element={ <Instruction /> }></Route>
+                <Route path="/about-us" element={ <AboutUs /> }></Route>
                 
 
 

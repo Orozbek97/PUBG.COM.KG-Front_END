@@ -1,10 +1,12 @@
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {Avatar} from '@mui/material';
 import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from 'react';
+import {Button} from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import {Helmet} from "react-helmet";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from 'react-router-dom';
 import {ClipLoader} from "react-spinners";
 import UserService from '../../services/UserService';
 import './playerPage.css';
@@ -15,7 +17,30 @@ const Players = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("prizeMoney");
+  const [pageNumberInput, setPageNumberInput] = useState("");
+  const usersPerPage = 15;
+  const [currentPage, setCurrentPage] = useState(() => {
+    const savedPage = parseInt(localStorage.getItem('currentPage'));
+    return isNaN(savedPage) ? 1 : savedPage;
+  });
+  
+  const location = useLocation();
+  
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage.toString());
+  }, [currentPage]);
+  
+  useEffect(() => {
+    const state = location.state;
+    if (state && state.currentPage) {
+      setCurrentPage(state.currentPage);
+    }
+  }, [location.state]);
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
   
   useEffect(() => {
     const getUsers = async () => {
@@ -37,6 +62,10 @@ const Players = () => {
   
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
+  };
+  
+  const handlePageNumberInputChange = (event) => {
+    setPageNumberInput(event.target.value);
   };
   
   const sortedUsers = [...users].sort((a, b) => {
@@ -63,7 +92,32 @@ const Players = () => {
       user.pubgNick.toLowerCase().includes(searchQuery.toLowerCase())
   );
   
+  // Определение индексов первого и последнего игрока на текущей странице
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
   
+  // Переключение на предыдущую страницу
+  const goToPrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+  
+  // Переключение на следующую страницу
+  const goToNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.ceil(filteredUsers.length / usersPerPage)));
+  };
+  
+  // Номер последней страницы
+  const lastPage = Math.ceil(filteredUsers.length / usersPerPage);
+  
+  // Переключение на указанную страницу
+  const goToPage = () => {
+    if (pageNumberInput !== "") {
+      const pageNumber = Math.min(Math.max(1, parseInt(pageNumberInput)), Math.ceil(filteredUsers.length / usersPerPage));
+      setCurrentPage(pageNumber);
+      setPageNumberInput("");
+    }
+  };
   
   if (loading) {
     return (
@@ -98,7 +152,6 @@ const Players = () => {
             </div>
             <div className="sort-bar">
               <select value={sortBy} onChange={handleSortChange}>
-                <option value="">Сортировать по..</option>
                 <option value="name">Имени</option>
                 <option value="prizeMoney">Сумме выигрыша</option>
                 <option value="game"> Количество игр</option>
@@ -110,19 +163,19 @@ const Players = () => {
             </div>
           </div>
           <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1">
-            {filteredUsers.map((user, index) => (
+            {currentUsers.map((user , index) => (
                 <div key={user.email} className="col my-1">
                   <Link to={`/player/${user._id}`}>
                     <div className="player-card">
                       <div className="player-number-avatar">
                         <div className="number-player">
-                          <p>{index + 1}</p>
+                          <p>{(currentPage - 1) * usersPerPage + index + 1}</p>
                         </div>
                         <div className="player-avatar">
                           <Avatar
                               alt="player-avatar"
                               src={user.image}
-                              sx={{width: 40, height: 40}}
+                              sx={{ width: 40, height: 40 }}
                           ></Avatar>
                         </div>
                       </div>
@@ -132,7 +185,7 @@ const Players = () => {
                       </div>
                       <div className="player-win-money-next-icon">
                         <div className="player-win-money">
-                          <p style={{color: 'silver'}}>
+                          <p style={{ color: 'silver' }}>
                             {sortBy === 'game' ? 'Игры:' :
                                 sortBy === 'kill' ? 'Киллы:' :
                                     sortBy === 'firstPlace' ? 'ТОП 1:' :
@@ -154,12 +207,35 @@ const Players = () => {
                         <NavigateNextIcon sx={{
                           background: 'none',
                           color: 'white'
-                        }}/>
+                        }} />
                       </div>
                     </div>
                   </Link>
                 </div>
             ))}
+          </div>
+          <div className="pagination">
+            <Button variant="danger"
+                    onClick={goToPrevPage}
+            >
+              <NavigateBeforeIcon
+                  style={{background: 'none'}}/>
+              Пред
+            </Button>
+            <p> {currentPage} </p>
+            ...
+            <p> {lastPage} </p>
+            <Button variant="danger"
+                    onClick={goToNextPage}
+            >
+              След
+              <NavigateNextIcon
+                  style={{background: 'none'}}/>
+            </Button>
+            <div>
+              <input type="number" value={pageNumberInput} onChange={handlePageNumberInputChange}/>
+              <button className="btn btn-info" onClick={goToPage}>Перейти</button>
+            </div>
           </div>
         </Container>
         <BottomNavigationBar/>

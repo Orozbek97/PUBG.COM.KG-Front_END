@@ -292,7 +292,9 @@ const TournamentPage = () => {
                        </div>
                    </div>
                    <div className="participation">
-                       {tournament.participants.map((e) => (
+                       {tournament.participants
+                           .sort((a, b) => a.place - b.place)
+                           .map((e) => (
                            <>
                                <Link to={`/player/${e.userId}`}>
                                    <div key={e.userId} className="participation-data">

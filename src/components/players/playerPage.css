@@ -160,8 +160,34 @@ a {
     border-radius: 10px;
     color: #f5f5f5;
     border: none;
-;
+}
+.pagination {
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    margin: 10px 0 40px 0;
+}
 
+.pagination p {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #4d5154;
+}
+.pagination input {
+    width: 50px;
+    padding: 6px;
+    color: #ffffff;
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background: #838080;
+    border: none;
+}
+.pagination input:focus {
+    background-color: #2F4F4F; /* Новый цвет фона в фокусе */
+    color: #ffffff; /* Новый цвет текста в фокусе */
 }
 
 /*Adaptive_style*/

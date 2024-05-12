@@ -197,4 +197,13 @@
 	align-items: center;
   margin: 10px 10px 10px 0;
 }
+.success-payment-icon {
+	background: none;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+.success-payment-icon p{
+	color: #58b002;
+}
 

@@ -14,7 +14,7 @@ import './phoneNumberStyle.css';
 
 const RegistrationForm = () => {
     const [name, setName] = useState('');
-    const [image , setImage] = useState('https://th.bing.com/th/id/OIG2.36TDDv5unKC5sLnsiuth?pid=ImgGn')
+    const [image , setImage] = useState('https://thumb.cloud.mail.ru/weblink/thumb/xw1/DLQD/DrzQ82XbZ')
     const [email, setEmail] = useState('');
     const [pubgNick, setPubgNick] = useState('');
     const [pubgId, setPubgId] = useState('');

@@ -63,8 +63,12 @@ const BottomNavigationBar = () => {
                     <Link to="/tournament/all"> Все турниры</Link>
                     <Link to="/player/all"> Рейтинг Игроков</Link>
                     <div className="line my-2"></div>
-                    <Link to="https://www.instagram.com/pubg_com_kg"> Наш Instagram</Link>
-                    <Link to="https://t.me/pubg_com_kg"> Наш Telegram</Link>
+                    <Link to="/instruction"> Вопросы-Ответы</Link>
+                    <Link to="/about-us"> О Нас</Link>
+                    <Link to="https://t.me/dark_warriorr"  target="_blank"> Написать Нам</Link>
+                    <div className="line my-2"></div>
+                    <Link to="https://www.instagram.com/pubg_com_kg"  target="_blank"> Наш Instagram</Link>
+                    <Link to="https://t.me/pubg_com_kg" target="_blank"> Наш Telegram</Link>
                     
                
                     <Button onClick={() => {

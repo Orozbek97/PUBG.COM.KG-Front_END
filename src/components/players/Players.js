@@ -11,21 +11,23 @@ import './playerPage.css';
 const Players = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         const getUsers = async () => {
             try {
                 const response = await UserService.fetchUsers();
-                setUsers(response.data);
+                const shuffledUsers = response.data.sort(() => Math.random() - 0.5); // Перемешиваем массив
+                const firstTenUsers = shuffledUsers.slice(0, 10); // Выбираем первые 10 элементов
+                setUsers(firstTenUsers);
                 setLoading(false);
             } catch (e) {
                 console.log(e);
             }
         };
-
+        
         getUsers();
     }, []);
-
+    
     if (loading) {
         return (
             <div className="d-flex flex-column justify-content-center align-items-center gap-2" style={{height: '30vh'}}>
@@ -35,7 +37,7 @@ const Players = () => {
         );
         
     }
-
+    
     return (
         <>
             <div className="player-page-title">

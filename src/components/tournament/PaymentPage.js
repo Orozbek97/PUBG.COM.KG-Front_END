@@ -13,10 +13,11 @@ import TournamentService from "../../services/TournamentService";
 import BottomNavigationBar from "../bottomNavigation/bottomNavigation";
 import Header from "../header/Header";
 import defaultCheckImage from './images/checkImage.png';
-import './tournaments.css'
-import "./tournament-page-style.css"
 import CopyIcon from './images/content_copy_icon.svg'
 import MbankIcon from './images/mbank_icon_ellipse.png';
+import SuccessIcon from './images/success-icon.png'
+import './tournaments.css'
+import "./tournament-page-style.css"
 
 
 const PaymentPage = () => {
@@ -217,8 +218,11 @@ const PaymentPage = () => {
                     <>
                         {
                             checkImage ?
-                                <img src={`${paymentImage}`} alt="check"
-                                     style={{width: '100px', height: '100px', borderRadius: '10px'}}/> :
+                                <div className="success-payment-icon">
+                                    <img src={`${SuccessIcon}`} alt="success-icon"
+                                         style={{width: '80px', height: '80px', borderRadius: '10px'}}/>
+                                    <p> чек загружен </p>
+                                </div> :
                                 <img src={`${defaultCheckImage}`} alt="check"
                                      style={{width: '100px', height: '100px', borderRadius: '10px'}}/>
                         }

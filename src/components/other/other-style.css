@@ -1,0 +1,60 @@
+
+.other-page-title h1 {
+	color: whitesmoke;
+	font-family: "Play Regular", sans-serif;
+}
+.other-page-navigation {
+	color: whitesmoke;
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0;
+}
+.other-page-navigation  h3 {
+	text-align: left;
+	font-size: 20px;
+}
+.other-page-small-container {
+	border-radius: 10px;
+	border: 1px solid white;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+.small-container-title h3 {
+	color: #e75454;
+	font-weight: 600;
+	font-family: "Play Regular", sans-serif;
+}
+.small-container-box {
+	margin: 10px 0 ;
+	border-bottom: 2px solid whitesmoke;
+	padding: 10px;
+}
+.small-container-box h4 {
+	color: white;
+}
+.small-container-box p {
+	color: white;
+	font-family: SofiaSans, sans-serif;
+	font-style: italic;
+	margin-bottom: 10px !important;
+	font-size: 20px;
+}
+.small-container-box:last-child {
+	border-bottom:  none;
+}
+.small-container-box mark {
+	background-color: red;
+	border-radius: 5px;
+	color: whitesmoke;
+}
+.small-container-box-img img {
+	background: none;
+	width: 200px;
+}
+.about-page-soc-links a {
+	color: #35cbe8;
+	text-align: center;
+}
+.about-page-soc-links {
+	color: whitesmoke;
+}
