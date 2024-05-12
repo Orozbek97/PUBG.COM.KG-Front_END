@@ -149,12 +149,12 @@ const PlayerPage = () => {
                             {player.tournaments.map((e, index) => (
                                 <>
                                     <Link to={`/tournament/id/${e.tournamentId}`}>
-                                        <div key={e._id} className="tournament-data">
+                                        <div key={e.tournamentId} className="tournament-data">
                                             <div className="tournament-statistic mx-1">
                                                 <div className="place-and-name">
                                                     <p className='mx-3'> {e.tournamentPlace}</p>
                                                     <div className="player-avatar-and-name mx-2">
-                                                        <p className='fw-bold'>{e.tournamentName}</p>
+                                                        <p> {e.tournamentName} </p>
                                                     </div>
                                                 </div>
                                                 <div className="kill-and-prizeMoney-data">
@@ -164,7 +164,7 @@ const PlayerPage = () => {
                                             </div>
                                             <div className="line my-1"></div>
                                             <div className="tournament-date">
-                                                <p> Дата: </p>
+                                                 Дата:
                                                 <p> {formatDate(e.tournamentDate)} | {formatTime(e.tournamentDate)} </p>
                                             </div>
                                         </div>

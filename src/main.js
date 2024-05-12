@@ -9,6 +9,7 @@ import FooterPage from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import Players from "./components/players/Players";
 import ActualTournaments from "./components/tournament/ActualTornaments";
+import CompletedTournamentsMainPage from "./components/tournament/CompletedTournamentsMainPage";
 
 const Main = () => {
     return (
@@ -18,6 +19,7 @@ const Main = () => {
           </Helmet>
             <Header />
             <ActualTournaments />
+            <CompletedTournamentsMainPage />
             <Container>
                 <div className="row row-cols-lg-4 row-cols-md-3  row-cols-1 my-auto">
                     <div className="col"></div>

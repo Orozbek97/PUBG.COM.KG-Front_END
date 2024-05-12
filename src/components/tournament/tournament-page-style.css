@@ -57,7 +57,7 @@
 	margin: 5px 0 ;
 }
 .tournament-data {
-	background-color: #6c6969;
+	background-color: silver;
 	border-radius: 10px;
 	padding: 10px;
 	margin: 5px 0 ;
@@ -75,17 +75,21 @@
 	justify-content: end;
 	gap: 10px;
 	margin-top: 10px;
+	color: #171616;
 }
 
 .participation-data p{
 	color: white;
 }
 .tournament-data p {
-	color: white;
+	color: #000000;
 	font-family: "Play Regular" , sans-serif;
 }
 .tournament-date p {
-	color: #ccc5c5;
+	color: #ffffff;
+	background: #424141;
+	padding: 5px;
+	border-radius: 5px;
 }
 .tournament-name-name {
 	margin-left: 5px;
@@ -205,5 +209,21 @@
 }
 .success-payment-icon p{
 	color: #58b002;
+}
+.firstPlaceGold {
+	background: gold;
+}
+.firstPlaceGold p {
+	color: #000000;
+}
+.secondPlaceSilver {
+	background: silver;
+}
+.secondPlaceSilver p {
+	color: #000;
+}
+.thirdPlaceBronze {
+	background: brown;
+	margin-bottom: 15px;
 }
 

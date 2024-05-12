@@ -210,7 +210,7 @@ const PersonalArea = () => {
                                                     <div className="place-and-name">
                                                         <p className='mx-3'> {e.tournamentPlace}</p>
                                                         <div className="player-avatar-and-name mx-2">
-                                                            <p className='fw-bold'>{e.tournamentName}</p>
+                                                            <p> {e.tournamentName} </p>
                                                         </div>
                                                     </div>
                                                     <div className="kill-and-prizeMoney-data">
@@ -220,7 +220,8 @@ const PersonalArea = () => {
                                                 </div>
                                                 <div className="line my-1"></div>
                                                 <div className="tournament-date">
-                                                    <p> Дата: </p> <p> {formatDate(e.tournamentDate)} | {formatTime(e.tournamentDate)} </p>
+                                                     Дата:
+                                                    <p> {formatDate(e.tournamentDate)} | {formatTime(e.tournamentDate)} </p>
                                                 </div>
                                             </div>
                                     </Link>

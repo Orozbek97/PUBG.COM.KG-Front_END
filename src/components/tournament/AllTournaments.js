@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Tab, Tabs} from "react-bootstrap";
 import {Helmet} from "react-helmet";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import BottomNavigationBar from "../bottomNavigation/bottomNavigation";
 import Header from "../header/Header";
 import ActualTournaments from "./ActualTornaments";
@@ -14,7 +14,6 @@ const AllTournaments = () => {
     return savedTab || "Actual"; // По умолчанию открываем вкладку "Предстоящие"
   });
   
-  const navigate = useNavigate();
   const location = useLocation();
   
   useEffect(() => {

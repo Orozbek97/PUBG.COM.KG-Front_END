@@ -84,11 +84,6 @@ const TournamentPage = () => {
         checkDeadlineAndMaxPlayers();
     }, [tournament, registrationDeadline]);
     
-    
-    
-    
-    
-    
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -109,8 +104,21 @@ const TournamentPage = () => {
     const secondPlaceMoney = (prizeMoney / 100) * 30
     const thirdPlaceMoney = (prizeMoney / 100) * 15
     
+    /////////Background-Color for Player Place//////////
+    const getPlaceClassName = (place) => {
+        switch (place) {
+            case 1:
+                return "firstPlaceGold";
+            case 2:
+                return "secondPlaceSilver";
+            case 3:
+                return "thirdPlaceBronze";
+            default:
+                return "";
+        }
+    };
     
-    ///////////////////////////////
+    
     
     
     if (loading) {
@@ -297,7 +305,7 @@ const TournamentPage = () => {
                            .map((e) => (
                            <>
                                <Link to={`/player/${e.userId}`}>
-                                   <div key={e.userId} className="participation-data">
+                                   <div key={e.userId} className={`participation-data ${getPlaceClassName(e.place)}`}>
                                        <div className="place-and-name">
                                            <p> {e.place}</p>
                                            <div className="player-avatar-and-name">

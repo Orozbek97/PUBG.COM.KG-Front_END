@@ -163,10 +163,11 @@ const PaymentPage = () => {
                                     <div className="payment-choice">
                                         <div className="mbank-visa-pay">
                                             <div className="icon-pay-choice">
-                                                <img src={MbankIcon}
+                                                <img src={`${MbankIcon}`}
                                                      width={'40px'}
                                                      height={'35px'}
-                                                     style={{background: 'none'}}/>
+                                                     style={{background: 'none'}}
+                                                     alt="Mbank Icon"/>
                                                 <p> 0777 814 197 </p>
                                             </div>
                                             <div className="copy-btn" style={{background: 'none'}}>
